@@ -2,11 +2,14 @@
   hosts: mysql
   become: yes
   tasks:
+  vars:
+    mysql_root_password: ExpenseApp@1
+
   - name: Install MySQL libraries
     ansible.builtin.pip:
       name: PyMySQL
       executable: pip3.9
-
+   
   - name: Install MySQL server
     ansible.builtin.package:
       name: mysql-server
@@ -21,7 +24,7 @@
   - name: connect to mysql server
     community.mysql.mysql_info:
       login_user: root
-      login_password: ExpenseApp@1
+      login_password: "{{ mysql_root_password }}"
       login_host: mysql.rushika.site
     register: mysql_info
     ignore_errors: true
