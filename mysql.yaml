@@ -13,6 +13,19 @@
       state: started   
       enabled: yes
 
+  - name: connect to mysql server
+    community.mysql.mysql_info:
+      login_user: root
+      login_password: ExpenseApp@1
+      login_host: mysql.rushika.site
+    register: mysql_info
+
+  - name: print the output  
+    ansible.builtin.debug:
+      msg: "MySQL Info: {{ mysql_info }}"
+
+
+
   
 
 
