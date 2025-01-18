@@ -48,11 +48,11 @@
 
   - name: import mysql data
     community.mysql.mysql_db:
-    state: import
-    name: all
-    login_user: root
-    login_password: ExpenseAPP@1
-    login_host: mysql.rushika.site
-    target: /app/schema/backend.sql
+      state: import
+      name: all
+      login_user: root
+      login_password: ExpenseAPP@1
+      login_host: mysql.rushika.site
+      target: /app/schema/backend.sql
 
 
