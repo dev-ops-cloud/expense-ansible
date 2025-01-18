@@ -48,8 +48,11 @@
 
   - name: install python libs
     ansible.builtin.pip:
-      name: PyMySQL
-      executable: pip3.9    
+      name: " {{ item }} "
+      executable: pip3.9
+    loop:
+    - cryptography
+    - PyMySQL 
 
   - name: import mysql data
     community.mysql.mysql_db:
