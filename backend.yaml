@@ -10,8 +10,12 @@
 
   - name: install nodejs
     ansible.builtin.package:
-      name: nodejs
+      name: {{ item }}
       state: present  
+
+    loop:
+    - nodejs
+    - mysql  
 
   - name: create expense user
     ansible.builtin.user:
@@ -36,5 +40,19 @@
   - name: Install dependencies
     community.general.npm:
       path: /app
+
+  - name: copy backend service
+    ansible.builtin.copy:
+    src: backend.service
+    dest: /etc/systemd/system/backend.service
+
+  - name: import mysql data
+    community.mysql.mysql_db:
+    state: import
+    name: all
+    login_user: root
+    login_password: ExpenseAPP@1
+    login_host: mysql.rushika.site
+    target: /app/schema/backend.sql
 
 
